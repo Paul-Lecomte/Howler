@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8d8f549c-d5e7-4d09-b031-5d34884ad46c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/backend/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/ChatRoom.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/ChatRoom.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/ContactList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/ContactList.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/UsernamePrompt.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/UsernamePrompt.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +21,7 @@
       <list>
         <option value="HTML File" />
         <option value="JavaScript File" />
+        <option value="JSX File" />
       </list>
     </option>
   </component>
@@ -30,12 +34,12 @@
     &quot;assignee&quot;: &quot;Paul-Lecomte&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Paul-Lecomte/Howler.git",
-    "accountId": "a9f32506-7834-4ccb-badd-e49871000174"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Paul-Lecomte/Howler.git&quot;,
+    &quot;accountId&quot;: &quot;a9f32506-7834-4ccb-badd-e49871000174&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
@@ -54,6 +58,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\WebStorm 2024.2.1\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -74,7 +79,8 @@
       <updated>1734684567638</updated>
       <workItem from="1734684568930" duration="531000" />
       <workItem from="1734685115283" duration="331000" />
-      <workItem from="1734685473902" duration="656000" />
+      <workItem from="1734685473902" duration="8890000" />
+      <workItem from="1735286468392" duration="1262000" />
     </task>
     <servers />
   </component>

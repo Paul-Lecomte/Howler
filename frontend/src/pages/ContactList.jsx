@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import socket from '../socket'; // Assume socket is initialized
+import socket from '../socket';
 
 const ContactList = () => {
     const [contacts, setContacts] = useState([]);
@@ -10,87 +10,88 @@ const ContactList = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Check if username is saved in localStorage
         const storedUsername = localStorage.getItem('username');
         if (!storedUsername) {
-            navigate('/username'); // Redirect to username prompt if not set
+            navigate('/username');
         } else {
             setUsername(storedUsername);
-            socket.emit('setUsername', storedUsername); // Emit username to the server
+            socket.emit('setUsername', storedUsername);
         }
 
-        // Load contacts from localStorage if available
         const storedContacts = JSON.parse(localStorage.getItem('contacts')) || [];
         if (storedContacts.length > 0) {
-            setContacts(storedContacts); // Set contacts from localStorage
-            setFilteredContacts(storedContacts); // Set filtered contacts for search
+            setContacts(storedContacts);
+            setFilteredContacts(storedContacts);
         }
 
-        // Listen for the user list update from server
         socket.on('users', (userList) => {
-            console.log("Updated User List:", userList);
-            const filteredContacts = userList.filter(user => user !== storedUsername); // Exclude current user
-            setContacts(filteredContacts); // Update contacts list
-            setFilteredContacts(filteredContacts); // Set filtered contacts for search
-            localStorage.setItem('contacts', JSON.stringify(filteredContacts)); // Store updated contacts
+            const filteredContacts = userList.filter(user => user !== storedUsername);
+            setContacts(filteredContacts);
+            setFilteredContacts(filteredContacts);
+            localStorage.setItem('contacts', JSON.stringify(filteredContacts));
         });
 
-        // Cleanup when component unmounts
         return () => {
-            socket.off('users'); // Unsubscribe from 'users' event
+            socket.off('users');
         };
     }, [navigate]);
 
     useEffect(() => {
-        // Filter contacts based on search query
         const results = contacts.filter(contact =>
             contact.toLowerCase().includes(searchQuery.toLowerCase())
         );
-        setFilteredContacts(results); // Update the filtered contacts state
+        setFilteredContacts(results);
     }, [searchQuery, contacts]);
 
     const handleContactClick = (contact) => {
-        navigate(`/chat/${contact}`); // Navigate to the chat room with the selected contact
+        navigate(`/chat/${contact}`);
     };
 
     return (
-        <div className="bg-gray-900 text-white h-screen">
-            <div className="p-4 border-b border-gray-700 flex items-center space-x-4">
-                <div className="bg-gray-700 rounded-full w-10 h-10" />
-                <span className="text-lg font-bold">{username}</span>
+        <div className="bg-gray-900 text-white h-screen flex flex-col">
+            {/* Header */}
+            <div className="p-4 border-b border-gray-700 flex items-center">
+                <div className="w-10 h-10 rounded-full bg-gray-700 mr-4" />
+                <div className="text-lg font-bold">{username}</div>
             </div>
 
-            {/* Search input */}
+            {/* Search Input */}
             <div className="p-4">
                 <input
                     type="text"
                     placeholder="Search a chat"
                     value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)} // Update search query
-                    className="w-full p-2 rounded-lg bg-gray-800 text-gray-300"
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full p-3 rounded-full bg-gray-800 text-gray-300 placeholder-gray-500 focus:outline-none focus:ring focus:ring-blue-500"
                 />
             </div>
 
-            {/* Display contacts */}
-            <div>
+            {/* Contacts List */}
+            <div className="flex-1 overflow-y-auto">
                 {filteredContacts.length > 0 ? (
                     filteredContacts.map((contact, index) => (
                         <div
                             key={index}
-                            className="p-4 flex items-center justify-between hover:bg-gray-800 cursor-pointer"
-                            onClick={() => handleContactClick(contact)} // Navigate to the chat with the contact
+                            className="p-4 flex items-center hover:bg-gray-800 cursor-pointer"
+                            onClick={() => handleContactClick(contact)}
                         >
-                            <div className="flex items-center space-x-4">
-                                <div className="bg-gray-700 rounded-full w-12 h-12" />
-                                <div>
-                                    <div className="font-bold">{contact}</div> {/* Display the contact's username */}
-                                </div>
-                            </div>
+                            <div className="w-12 h-12 rounded-full bg-gray-700 mr-4" />
+                            <div className="text-sm font-medium">{contact}</div>
                         </div>
                     ))
                 ) : (
-                    <p className="text-center text-gray-400">No contacts available</p>
+                    <div className="text-center text-gray-400 p-4">No contacts available</div>
                 )}
+            </div>
+
+            {/* Footer */}
+            <div className="p-4 border-t border-gray-700 text-center text-gray-500">
+                <button
+                    onClick={() => navigate('/settings')}
+                    className="text-sm font-medium hover:text-white"
+                >
+                    Settings
+                </button>
             </div>
         </div>
     );
